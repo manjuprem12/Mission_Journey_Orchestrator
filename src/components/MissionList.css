@@ -1,0 +1,59 @@
+.table-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .search-container {
+    position: relative;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px 30px 10px 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    text-align: left;
+    background-color: #f9f9f9;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .ucdelete {
+    cursor: pointer;
+    margin-left: 1em;
+  }
+  
+  .text-danger {
+    color: #dc3545 !important;
+  }
+  
