@@ -120,7 +120,7 @@ The generated project includes React and ReactDOM as dependencies. It also inclu
 npm install --save <library-name>
 ```
 
-##Testing 
+##testing 
 Starting with Home page
 ![image](https://github.com/manjuprem12/Mission_Journey_Orchestrator/assets/50079772/15a72426-2f83-4338-97a5-6aa7f0f34f4f)
 
