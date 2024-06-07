@@ -10,6 +10,44 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - [npm run build](#npm-run-build)
   - [npm run eject](#npm-run-eject)
 - [Installing a Dependency](#installing-a-dependency)
+
+## Folder Structure
+After creation, project look like this:
+```
+my-app/
+  README.md
+  node_modules/
+  package.json
+  package-lock.json
+  public/
+    index.html
+    favicon.ico
+  src/
+    Assets/
+       dream.jpeg
+       home.jpeg
+       journey.jpeg
+       start.jpeg
+    components/
+       Home.js
+       MissionForm.js
+       MissionList.js 
+    state/
+       missionsSlice.js
+       MockData.json
+    style/
+       Home.scss
+       MissionList.scss
+    utils/
+       dateUtils.js
+       validations.js
+    App.css
+    App.js
+    App.test.js
+    index.css
+    index.js
+    logo.svg    
+```
 ## Available Scripts
 
 In the project directory, you can run:
