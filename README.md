@@ -1,8 +1,11 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 Git clone (https://github.com/manjuprem12/Mission_Journey_Orchestrator.git)
+
 Path to the application (https://mission-journey-orchestrator.vercel.app/)
+
 ## Table of Contents
 - [Project Setup] (#project-setup)
 - [Folder Structure](#folder-structure)
