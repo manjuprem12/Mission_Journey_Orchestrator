@@ -14,8 +14,8 @@ Path to the application (https://mission-journey-orchestrator.vercel.app/)
   - [npm run eject](#npm-run-eject)
 - [Dependencies](#dependencies)
 - [Installing a Dependency](#installing-a-dependency)
-- [Functionalities](#functionalities)
 - [Testing](#testing)
+- [Functionalities](#functionalities)
 - [Deployment](#deployment)
 - [Documents Refered](#documents-refered)
 
@@ -120,14 +120,14 @@ The generated project includes React and ReactDOM as dependencies. It also inclu
 npm install --save <library-name>
 ```
 
-##testing 
+## Testing 
 Starting with Home page
 ![image](https://github.com/manjuprem12/Mission_Journey_Orchestrator/assets/50079772/15a72426-2f83-4338-97a5-6aa7f0f34f4f)
 
 in Feature there is a button called Next once click on it page will redirect to Mission list page
 ![image](https://github.com/manjuprem12/Mission_Journey_Orchestrator/assets/50079772/b7dae5a9-675a-4d56-a128-addfa24b7317)
 
-##Functionalities
+## Functionalities
    1. Add mission
    2. Edit mission
    3. Delete mission
@@ -160,6 +160,7 @@ To learn Sass, check out the [Sass documentation ] (https://sass-lang.com/docume
 
 ## Deployment
 Code deployed in Github   (https://github.com/)
+
 Code production done with Vercel (https://vercel.com)
 
 ### Code Splitting
