@@ -1,497 +1,179 @@
-// import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { deleteMission } from '../state/missionsSlice';
-// import MissionForm from './MissionForm';
-// import { Modal } from 'react-bootstrap';
-// import { GrEdit } from 'react-icons/gr'
-// const MissionList = () => {
-//   const missions = useSelector((state) => state.missions);
-//   const dispatch = useDispatch();
-//   const [isFormVisible, setFormVisible] = useState(false);
-//   const [selectedMission, setSelectedMission] = useState(null);
-
-//   const toggleFormVisibility = (mission = null) => {
-//     setSelectedMission(mission);
-//     setFormVisible(!isFormVisible);
-//   };
-
-//   const handleClose = () => {
-//     setFormVisible(false);
-//     setSelectedMission(null);
-//   };
-
-//   return (
-//     <React.Fragment>
-//       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <h1>Missions</h1>
-//         <button onClick={() => toggleFormVisibility()}>New Mission</button>
-//       </div>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Name</th>
-//             <th>Crew Count</th>
-//             <th>Destination</th>
-//             <th>Departure Date</th>
-//             <th>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {missions && missions.length > 0 ? (
-//             missions.map((mission) => (
-//               <tr key={mission.id}>
-//                 <td>{mission.name}</td>
-//                 <td>{mission.members?.length}</td>
-//                 <td>{mission.destination}</td>
-//                 <td>{mission.departure}</td>
-//                 <td>
-//                   {/* <button onClick={() => toggleFormVisibility(mission)}>Edit</button> */}
-//                   <GrEdit className={'ucedit'} onClick={() => toggleFormVisibility(mission)} />&nbsp;
-//                   {/* <button onClick={() => dispatch(deleteMission(mission.id))}>Delete</button> */}
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="5">No missions available</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//       {isFormVisible && <MissionForm handleCloseModal={handleClose} mission={selectedMission} isFormVisible={isFormVisible} />}
-//     </React.Fragment>
-//   );
-// };
-
-// export default MissionList;
-
-// import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { deleteMission } from '../state/missionsSlice';
-// import MissionForm from './MissionForm';
-// import { Modal } from 'react-bootstrap';
-// import { GrEdit } from 'react-icons/gr';
-// import { AiOutlineSearch } from "react-icons/ai";
-
-// const MissionList = () => {
-//   const missions = useSelector((state) => state.missions);
-//   const dispatch = useDispatch();
-//   const [isFormVisible, setFormVisible] = useState(false);
-//   const [selectedMission, setSelectedMission] = useState(null);
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   const toggleFormVisibility = (mission = null) => {
-//     setSelectedMission(mission);
-//     setFormVisible(!isFormVisible);
-//   };
-
-//   const handleClose = () => {
-//     setFormVisible(false);
-//     setSelectedMission(null);
-//   };
-
-//   const handleSearchChange = (event) => {
-//     setSearchTerm(event.target.value);
-//   };
-
-//   const filteredMissions = missions.filter((mission) =>
-//     mission.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
-
-//   return (
-//     <React.Fragment>
-//       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <h1>Missions</h1>
-//         <button onClick={() => toggleFormVisibility()}>New Mission</button>
-//       </div>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>
-//               Name
-//               <br />
-//               <div style={styles.searchContainer}>
-//                 <input
-//                   type="text"
-//                   placeholder="Search by name"
-//                   value={searchTerm}
-//                   onChange={handleSearchChange}
-//                   style={styles.searchInput}
-//                 />
-//                 <AiOutlineSearch style={styles.searchIcon} />
-//               </div>
-//             </th>
-//             <th>Crew Count</th>
-//             <th>Destination</th>
-//             <th>Departure Date</th>
-//             <th>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {filteredMissions && filteredMissions.length > 0 ? (
-//             filteredMissions.map((mission) => (
-//               <tr key={mission.id}>
-//                 <td>{mission.name}</td>
-//                 <td>{mission.members?.length}</td>
-//                 <td>{mission.destination}</td>
-//                 <td>{mission.departure}</td>
-//                 <td>
-//                   <GrEdit className={'ucedit'} onClick={() => toggleFormVisibility(mission)} />&nbsp;
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="5">No missions available</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//       {isFormVisible && (
-//         <MissionForm handleCloseModal={handleClose} mission={selectedMission} isFormVisible={isFormVisible} />
-//       )}
-//     </React.Fragment>
-//   );
-// };
-
-// export default MissionList;
-
-// const styles = {
-//   searchContainer: {
-//     position: 'relative',
-//     width: '100%',
-//   },
-//   searchInput: {
-//     width: '100%',
-//     padding: '10px 30px 10px 10px',
-//     border: 'none',
-//     borderBottom: '1px solid #ccc',
-//     outline: 'none',
-//     fontSize: '16px',
-//   },
-//   searchIcon: {
-//     position: 'absolute',
-//     top: '50%',
-//     right: '10px',
-//     transform: 'translateY(-50%)',
-//     cursor: 'pointer',
-//     color: '#888',
-//   },
-// };
-
-// import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { deleteMission } from '../state/missionsSlice';
-// import MissionForm from './MissionForm';
-// import { Modal } from 'react-bootstrap';
-// import { GrEdit } from 'react-icons/gr';
-// import { AiOutlineSearch } from "react-icons/ai";
-
-// const MissionList = () => {
-//   const missions = useSelector((state) => state.missions);
-//   const dispatch = useDispatch();
-//   const [isFormVisible, setFormVisible] = useState(false);
-//   const [selectedMission, setSelectedMission] = useState(null);
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   const toggleFormVisibility = (mission = null) => {
-//     setSelectedMission(mission);
-//     setFormVisible(!isFormVisible);
-//   };
-
-//   const handleClose = () => {
-//     setFormVisible(false);
-//     setSelectedMission(null);
-//   };
-
-//   const handleSearchChange = (event) => {
-//     setSearchTerm(event.target.value);
-//   };
-
-//   const filteredMissions = missions.filter((mission) =>
-//     mission.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
-
-//   return (
-//     <React.Fragment>
-//       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <h1>Missions</h1>
-//         <button onClick={() => toggleFormVisibility()}>New Mission</button>
-//       </div>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>
-//               Name
-//               <br />
-//               <div style={styles.searchContainer}>
-//                 <input
-//                   type="text"
-//                   placeholder="Search by name"
-//                   value={searchTerm}
-//                   onChange={handleSearchChange}
-//                   style={styles.searchInput}
-//                 />
-//                 <AiOutlineSearch style={styles.searchIcon} />
-//               </div>
-//             </th>
-//             <th>Crew Count</th>
-//             <th>Destination</th>
-//             <th>Departure Date</th>
-//             <th>Actions</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {filteredMissions && filteredMissions.length > 0 ? (
-//             filteredMissions.map((mission) => (
-//               <tr key={mission.id}>
-//                 <td>{mission.name}</td>
-//                 <td>{mission.members?.length}</td>
-//                 <td>{mission.destination}</td>
-//                 <td>{mission.departure}</td>
-//                 <td>
-//                   <GrEdit className={'ucedit'} onClick={() => toggleFormVisibility(mission)} />&nbsp;
-//                 </td>
-//               </tr>
-//             ))
-//           ) : (
-//             <tr>
-//               <td colSpan="5">No missions available</td>
-//             </tr>
-//           )}
-//         </tbody>
-//       </table>
-//       {isFormVisible && (
-//         <MissionForm handleCloseModal={handleClose} mission={selectedMission} isFormVisible={isFormVisible} />
-//       )}
-//     </React.Fragment>
-//   );
-// };
-
-// export default MissionList;
-
-// const styles = {
-//   searchContainer: {
-//     position: 'relative',
-//     width: '100%',
-//   },
-//   searchInput: {
-//     width: '100%',
-//     padding: '10px 30px 10px 10px',
-//     border: 'none',
-//     borderBottom: '1px solid #ccc',
-//     outline: 'none',
-//     fontSize: '16px',
-//   },
-//   searchIcon: {
-//     position: 'absolute',
-//     top: '50%',
-//     right: '10px',
-//     transform: 'translateY(-50%)',
-//     cursor: 'pointer',
-//     color: '#888',
-//   },
-// };
-
-// import React, { useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { deleteMission } from '../state/missionsSlice';
-// import MissionForm from './MissionForm';
-// import { Modal } from 'react-bootstrap';
-// import { GrEdit } from 'react-icons/gr';
-// import { AiOutlineSearch } from "react-icons/ai";
-// import './MissionList.css';
-
-// const MissionList = () => {
-//   const missions = useSelector((state) => state.missions);
-//   const dispatch = useDispatch();
-//   const [isFormVisible, setFormVisible] = useState(false);
-//   const [selectedMission, setSelectedMission] = useState(null);
-//   const [searchTerm, setSearchTerm] = useState('');
-
-//   const toggleFormVisibility = (mission = null) => {
-//     setSelectedMission(mission);
-//     setFormVisible(!isFormVisible);
-//   };
-
-//   const handleClose = () => {
-//     setFormVisible(false);
-//     setSelectedMission(null);
-//   };
-
-//   const handleSearchChange = (event) => {
-//     setSearchTerm(event.target.value);
-//   };
-
-//   const filteredMissions = missions.filter((mission) =>
-//     mission.name.toLowerCase().includes(searchTerm.toLowerCase())
-//   );
-
-//   return (
-//     <React.Fragment>
-//       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//         <h1>Missions</h1>
-//         <button onClick={() => toggleFormVisibility()}>New Mission</button>
-//       </div>
-//       <div className="table-container">
-//         <table>
-//           <thead>
-//             <tr>
-//               <th>Name
-//                 <div className="search-container">
-//                 <AiOutlineSearch className="search-icon" />
-//                   <input
-//                     type="text"
-//                     placeholder="Search by name"
-//                     value={searchTerm}
-//                     onChange={handleSearchChange}
-//                     className="search-input"
-//                   />
-                  
-//                 </div>
-//               </th>
-//               <th>Crew Count</th>
-//               <th>Destination</th>
-//               <th>Departure Date</th>
-//               <th>Actions</th>
-//             </tr>
-//           </thead>
-//           <tbody>
-//             {filteredMissions && filteredMissions.length > 0 ? (
-//               filteredMissions.map((mission) => (
-//                 <tr key={mission.id}>
-//                   <td>{mission.name}</td>
-//                   <td>{mission.members?.length}</td>
-//                   <td>{mission.destination}</td>
-//                   <td>{mission.departure}</td>
-//                   <td>
-//                     <GrEdit className={'ucedit'} onClick={() => toggleFormVisibility(mission)} />&nbsp;
-//                   </td>
-//                 </tr>
-//               ))
-//             ) : (
-//               <tr>
-//                 <td colSpan="5">No missions available</td>
-//               </tr>
-//             )}
-//           </tbody>
-//         </table>
-//       </div>
-
-
-//       {isFormVisible && (
-//         <MissionForm handleCloseModal={handleClose} mission={selectedMission} isFormVisible={isFormVisible} />
-//       )}
-//     </React.Fragment>
-//   );
-// };
-
-// export default MissionList;
-
-
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteMission } from '../state/missionsSlice';
-import MissionForm from './MissionForm';
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
+
+//React icons
 import { GrEdit } from 'react-icons/gr';
-import { AiOutlineSearch } from "react-icons/ai";
-import './MissionList.css';
+import { FcHome } from "react-icons/fc";
+import { AiOutlineSearch, AiOutlineDelete } from 'react-icons/ai';
+import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+
+//Style
+import '../style/MissionList.scss';
+
+//Components
+import { deleteMission } from '../state/missionsSlice';
+import { formatDateGrid } from '../utils/dateUtils';
+import MissionForm from './MissionForm';
+
 
 const MissionList = () => {
   const missions = useSelector((state) => state.missions);
   const dispatch = useDispatch();
+
   const [isFormVisible, setFormVisible] = useState(false);
   const [selectedMission, setSelectedMission] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [sortConfig, setSortConfig] = useState({ key: 'members', direction: 'asc' });
+  const missionsPerPage = 6;
 
-  const toggleFormVisibility = (mission = null) => {
+  const navigate = useNavigate()
+
+  //Event handling for Add and Update button
+  const handleMission = (mission = null) => {
     setSelectedMission(mission);
     setFormVisible(!isFormVisible);
   };
 
+  //Event handler for modal closing
   const handleClose = () => {
     setFormVisible(false);
     setSelectedMission(null);
   };
 
+  //Event handler for Search input field
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  //Event handler for Home button to navigate back to home page
+  const handleSubmit = () => {
+    navigate('/')
+  }
+
+  //Event occur during date calculation 
   const getStatus = (departureDate) => {
     const now = new Date();
-    const departure = new Date(departureDate.split('/').reverse().join('-')); // Convert "dd/mm/yyyy" to "yyyy-mm-dd"
+    const [year, day, month] = departureDate.split('-');
+    const departureDay = `${year}-${month}-${day}`;
+    const departure = new Date(departureDay);
     const diffTime = departure - now;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
     if (diffDays < 0) {
-      return <span style={{ color: 'red', fontSize:' xx-small' }} >Departed</span>;
+      return { text: <span className='mission-list__danger-text'>Departed</span>, isDeparted: true };
     } else if (diffDays === 0) {
-      return "Today";
+      return { text: <span className='mission-list__text'>Today</span>, isDeparted: false };
     } else if (diffDays === 1) {
-      return "In 1 Day";
+      return { text: <span className='mission-list__text'>In 1 Day</span>, isDeparted: false };
     } else if (diffDays < 7) {
-      return `In ${diffDays} Days`;
+      return { text: <span className='mission-list__text'>In {diffDays} Days</span>, isDeparted: false };
     } else if (diffDays < 30) {
       const weeks = Math.ceil(diffDays / 7);
-      return `In ${weeks} Week${weeks > 1 ? 's' : ''}`;
+      return { text: <span className='mission-list__text'>In {weeks} Week{weeks > 1 ? 's' : ''}</span>, isDeparted: false };
     } else {
       const months = Math.ceil(diffDays / 30);
-      return `In ${months} Month${months > 1 ? 's' : ''}`;
+      return { text: <span className='mission-list__text'>In {months} Month{months > 1 ? 's' : ''}</span>, isDeparted: false };
     }
+  };
+
+  //Event handler for sort functionality
+  const handleSortChange = (key) => {
+    let direction = 'asc';
+    if (sortConfig.key === key && sortConfig.direction === 'asc') {
+      direction = 'desc';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  //Sorting event
+  const sortMissions = (missions, config) => {
+    const sortedMissions = [...missions];
+    sortedMissions.sort((a, b) => {
+      if (a[config.key].length < b[config.key].length) {
+        return config.direction === 'asc' ? -1 : 1;
+      }
+      if (a[config.key].length > b[config.key].length) {
+        return config.direction === 'asc' ? 1 : -1;
+      }
+      return 0;
+    });
+    return sortedMissions;
   };
 
   const filteredMissions = missions.filter((mission) =>
     mission.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const sortedMissions = sortMissions(filteredMissions, sortConfig);
+  const indexOfLastMission = currentPage * missionsPerPage;
+  const indexOfFirstMission = indexOfLastMission - missionsPerPage;
+  const currentMissions = sortedMissions.slice(indexOfFirstMission, indexOfLastMission);
+  const totalPages = Math.ceil(filteredMissions.length / missionsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <React.Fragment>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <div className='mission-list__container'>
+      <div className="mission-list__mission-div">
         <h1>Missions</h1>
-        <button onClick={() => toggleFormVisibility()}>New Mission</button>
+        <Button variant="outline-primary" onClick={() => handleMission()}>New Mission</Button>
       </div>
-      <div className="table-container">
-        <table>
+      <div className="mission-list__table-container">
+        <table >
           <thead>
             <tr>
-              <th>Name
-                <div className="search-container">
-                <AiOutlineSearch className="search-icon" />
+              <th>
+                <div className="mission-list__search-container">
+                  <AiOutlineSearch className="mission-list__search-container__icon" />
                   <input
                     type="text"
                     placeholder="Search by name"
                     value={searchTerm}
                     onChange={handleSearchChange}
-                    className="search-input"
+                    className="mission-list__search-container__input"
                   />
                 </div>
               </th>
-              <th>Crew Count</th>
+              <th onClick={() => handleSortChange('members')}>
+                Members {sortConfig.key === 'members' ? (sortConfig.direction === 'asc' ? <IoIosArrowRoundUp /> : <IoIosArrowRoundDown />) : ''}
+              </th>
               <th>Destination</th>
-              <th>Departure Date</th>
-              <th>Actions</th>
+              <th>Departure</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            {filteredMissions && filteredMissions.length > 0 ? (
-              filteredMissions.map((mission) => (
-                <tr key={mission.id}>
-                  <td>{mission.name}</td>
-                  <td>{mission.members?.length}</td>
-                  <td>{mission.destination}</td>
-                  <td>
-                    <div>
-                      {mission.departureDate}
-                      <div style={{ textAlign: 'right'}}>{getStatus(mission.departureDate)}</div>
-                      
-                    </div>
+            {currentMissions && currentMissions.length > 0 ? (
+              currentMissions.map((mission) => {
+                const status = getStatus(mission.departureDate);
+                return (
+                  <tr key={mission.id}>
+                    <td>{mission.name}</td>
+                    <td>{mission.members?.length}</td>
+                    <td>{mission.destination}</td>
+                    <td>
+                      <div>
+                        {formatDateGrid(mission.departureDate)}
+                        <div>{status.text}</div>
+                      </div>
                     </td>
-                  <td>
-                    <GrEdit className={'ucedit'} onClick={() => toggleFormVisibility(mission)} />&nbsp;
-                  </td>
-                </tr>
-              ))
+                    <td>
+                      {!status.isDeparted && (
+                        <>
+                          <GrEdit className="mission-list__ucedit" onClick={() => handleMission(mission)} />
+                          <AiOutlineDelete
+                            className="ucdelete"
+                            onClick={() => dispatch(deleteMission(mission.id))}
+                          />
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
               <tr>
                 <td colSpan="5">No missions available</td>
@@ -499,57 +181,24 @@ const MissionList = () => {
             )}
           </tbody>
         </table>
+        <ul className="mission-list__pagination">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <li
+              key={index}
+              onClick={() => paginate(index + 1)}
+              className={`mission-list__pagination__item ${currentPage === index + 1 ? 'active' : ''}`}
+            >
+              {index + 1}
+            </li>
+          ))}
+        </ul>
       </div>
-
+      <FcHome className='mission-list__uchome' onClick={handleSubmit} />
       {isFormVisible && (
         <MissionForm handleCloseModal={handleClose} mission={selectedMission} isFormVisible={isFormVisible} />
       )}
-    </React.Fragment>
+    </div>
   );
 };
 
 export default MissionList;
-
-const styles = {
-  // tableContainer: {
-  //   marginTop: '20px',
-  //   border: '1px solid #ddd',
-  //   borderRadius: '8px',
-  //   overflow: 'hidden',
-  // },
-  searchContainer: {
-    position: 'relative',
-    marginTop: '10px',
-    width: '100%',
-  },
-  searchInput: {
-    width: '100%',
-    padding: '10px 30px 10px 10px',
-    border: 'none',
-    borderBottom: '1px solid #ccc',
-    outline: 'none',
-    fontSize: '16px',
-  },
-  searchIcon: {
-    position: 'absolute',
-    top: '50%',
-    right: '10px',
-    transform: 'translateY(-50%)',
-    cursor: 'pointer',
-    color: '#888',
-  },
-  // table: {
-  //   width: '100%',
-  //   borderCollapse: 'collapse',
-  // },
-  // th: {
-  //   textAlign: 'left',
-  //   backgroundColor: '#f9f9f9',
-  //   padding: '10px',
-  //   borderBottom: '1px solid #ddd',
-  // },
-  // td: {
-  //   padding: '10px',
-  //   borderBottom: '1px solid #ddd',
-  // },
-};

@@ -2,27 +2,43 @@ import React from 'react';
 import MissionList from './components/MissionList';
 // import MissionForm from './components/MissionForm';
 // import CrewForm from './components/CrewForm';
-import './styles.css';
+import './App.scss';
 import store from './Store';
 import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Home from './components/Home';
+import { Routes, Route } from "react-router-dom"
 
 function App() {
   return (
     <Provider store={store}>
-    <div className="app-container">
-      <h1>Mission Control</h1>
-      <div className="content">
-        <div className="missions">
-          <MissionList />
-        </div>
-        {/* <div className="forms">
+      <div>
+        {/* <h1>Mission Control</h1> */}
+        {/* <div className="content"> */}
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={
+                  <Home />
+                }
+                
+              > </Route>
+              <Route
+                exact
+                path="/Mission_List"
+                element={
+                  <MissionList />
+                }
+                
+              > </Route>
+            </Routes>
+          {/* <div className="forms">
           <MissionForm />
           <CrewForm missionId={1} />
         </div> */}
-      </div>
-    </div>
+        </div>
+      {/* </div> */}
     </Provider>
   );
   // return (

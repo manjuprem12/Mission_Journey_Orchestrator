@@ -1,0 +1,204 @@
+[
+    {
+        "id": 1,
+        "name": "Expedition 2021-11",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 1,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": "5",
+                "job": "Maintenance",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": 6,
+                "job": "Mechanics",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": "7",
+                "job": "Navigation",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 10,
+                "wealth": 1000
+            }
+        ],
+        "destination": "Mars Alpha-116",
+        "departureDate": "2024-28-05"
+    },
+    {
+        "id": 2,
+        "name": "Expedition 2021-10",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 10,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": 5,
+                "job": "Navigation",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 10,
+                "wealth": 1000
+            }
+        ],
+        "destination": "Mars Alpha-220",
+        "departureDate": "2024-06-06"
+    },
+    {
+        "id": 3,
+        "name": "Expedition 2022-05",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 15,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": 5,
+                "job": "Solar panels",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 10,
+                "wealth": 1000
+            }
+        ],
+        "destination": "Mars Alpha-116",
+        "departureDate": "2024-15-09"
+    },
+    {
+        "id": 4,
+        "name": "Expedition 2021-12",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 15,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": 5,
+                "job": "Maintenance",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 10,
+                "wealth": 1000
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 50,
+                "wealth": 1050
+            }
+        ],
+        "destination": "Mars Alpha-224",
+        "departureDate": "2024-13-06"
+    },
+    {
+        "id": 5,
+        "name": "Expedition 2022-01",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 10,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Engineer",
+                "experience": 5,
+                "job": "Solar panels",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 10,
+                "wealth": 1000
+            },
+            {
+                "type": "Engineer",
+                "experience": 2,
+                "job": "Navigation",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 30,
+                "wealth": 2000
+            }
+        ],
+        "destination": "Mars Alpha-220",
+        "departureDate": "2024-05-10"
+    },
+    {
+        "id": 6,
+        "name": "Expedition 2021-08",
+        "members": [
+            {
+                "type": "Pilot",
+                "experience": 10,
+                "job": "",
+                "age": "",
+                "wealth": ""
+            },
+            {
+                "type": "Passenger",
+                "experience": "",
+                "job": "",
+                "age": 30,
+                "wealth": 2000
+            }
+        ],
+        "destination": "Mars Alpha-110",
+        "departureDate": "2024-01-08"
+    }
+]

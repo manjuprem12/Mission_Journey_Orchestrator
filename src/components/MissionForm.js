@@ -1,888 +1,13 @@
-// import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addMission, updateMission } from '../state/missionsSlice';
-// import { validateMission } from '../utils/validations';
-// import { Modal, Button } from 'react-bootstrap';
-// import { AiOutlineDelete } from 'react-icons/ai'
-
-// const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
-//     const dispatch = useDispatch();
-
-//     // Ensure mission members are initialized as an empty array if undefined
-//     const initialMembers = mission && Array.isArray(mission.members) ? mission.members : [];
-
-//     const [name, setName] = useState(mission ? mission.name : '');
-//     const [members, setMembers] = useState(initialMembers);
-//     const [destination, setDestination] = useState(mission ? mission.destination : '');
-//     const [departure, setDeparture] = useState(mission ? mission.departure : '');
-//     const [errors, setErrors] = useState({});
-
-//     const [newMember, setNewMember] = useState({
-//         type: 'Pilot',
-//         experience: '',
-//         job: '',
-//         age: '',
-//         wealth: '',
-//     });
-
-//     useEffect(() => {
-//         if (mission) {
-//             setName(mission.name);
-//             setMembers(initialMembers);
-//             setDestination(mission.destination);
-//             setDeparture(mission.departure);
-//         }
-//     }, [mission]);
-
-//     const handleMemberChange = (e) => {
-//         const { name, value } = e.target;
-//         setNewMember((prevState) => ({
-//             ...prevState,
-//             [name]: value,
-//         }));
-//     };
-
-//     const handleAddMember = () => {
-//         setMembers([...members, newMember]);
-//         setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' });
-//     };
-
-//     const handleRemoveMember = (index) => {
-//         setMembers(members.filter((_, i) => i !== index));
-//     };
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         const validationErrors = validateMission(name, departure, newMember);
-//         if (Object.keys(validationErrors).length === 0) {
-//             const missionData = { name, members, destination, departure };
-//             if (mission) {
-//                 dispatch(updateMission({ ...mission, ...missionData }));
-//             } else {
-//                 dispatch(addMission({ id: Date.now(), ...missionData }));
-//             }
-//             handleCloseModal();
-//         } else {
-//             setErrors(validationErrors);
-//         }
-//     };
-
-//     return (
-//         <Modal show={isFormVisible} onHide={handleCloseModal} size="lg">
-//             <Modal.Header closeButton>
-//                 <Modal.Title>{mission ? 'Edit Mission' : 'New Mission'}</Modal.Title>
-//             </Modal.Header>
-//             <Modal.Body>
-//                 <form onSubmit={handleSubmit}>
-//                     <div style={{ display: "flex" }}>
-//                         <div>
-//                             <label>Mission Name:</label>
-//                             <input
-//                                 type="text"
-//                                 value={name}
-//                                 onChange={(e) => setName(e.target.value)}
-//                                 required
-//                             />
-//                             {errors.name && <span className="error">{errors.name}</span>}
-//                         </div>
-//                         <div>
-//                             <label>Destination:</label>
-//                             <select  value={destination} onChange={(e) => setDestination(e.target.value)}>
-//                                 <option value="Mars_Alpha_110">Mars Alpha-110</option>
-//                                 <option value="Mars_Alpha_220">Mars Alpha-220</option>
-//                                 <option value="Mars_Alpha_224">Mars Alpha-224</option>
-//                                 <option value="Mars_Alpha_116">Mars Alpha-116</option>
-
-
-//                             </select>
-//                         </div>
-//                         <div>
-//                             <label>Departure Date:</label>
-//                             <input
-//                                 type="date"
-//                                 value={departure}
-//                                 onChange={(e) => setDeparture(e.target.value)}
-//                                 required
-//                             />
-//                             {errors.departure && <span className="error">{errors.departure}</span>}
-//                         </div>
-//                     </div>
-
-
-//                     <hr />
-//                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//                         <h4>Members</h4>
-//                         <Button onClick={handleAddMember}>Add Member</Button>
-//                     </div>
-
-//                     {members.length > 0 && (
-//                         members.map((member, index) => (
-//                             <div>
-//                                 <div key={index} style={{ marginBottom: '1em', display: "flex" }}>
-//                                     <div>
-//                                         <label>Type:</label>
-//                                         <select value={member.type} onChange={(e) => handleMemberChange(e)}>
-//                                             <option value="Pilot">Pilot</option>
-//                                             <option value="Engineer">Engineer</option>
-//                                             <option value="Passenger">Passenger</option>
-//                                         </select>
-//                                     </div>
-//                                     {member.type === 'Pilot' && (
-//                                         <div>
-//                                             <label>Experience:</label>
-//                                             <input
-//                                                 type="number"
-//                                                 value={member.experience}
-//                                                 readOnly
-//                                             />
-//                                         </div>
-//                                     )}
-//                                     {member.type === 'Engineer' && (
-//                                         <>
-//                                             <div>
-//                                                 <label>Experience:</label>
-//                                                 <input
-//                                                     type="number"
-//                                                     value={member.experience}
-//                                                     readOnly
-//                                                 />
-//                                             </div>
-//                                             <div>
-//                                                 <label>Job:</label>
-//                                                 <input
-//                                                     type="text"
-//                                                     value={member.job}
-//                                                     readOnly
-//                                                 />
-//                                             </div>
-//                                         </>
-//                                     )}
-//                                     {member.type === 'Passenger' && (
-//                                         <>
-//                                             <div>
-//                                                 <label>Age:</label>
-//                                                 <input
-//                                                     type="number"
-//                                                     value={member.age}
-//                                                     readOnly
-//                                                 />
-//                                             </div>
-//                                             <div>
-//                                                 <label>Wealth:</label>
-//                                                 <input
-//                                                     type="number"
-//                                                     value={member.wealth}
-//                                                     readOnly
-//                                                 />
-//                                             </div>
-//                                         </>
-//                                     )}
-//                                     <div style={{ display: "flex", alignItems: "center" }}>
-//                                         <AiOutlineDelete className={'ucdelete'} onClick={() => handleRemoveMember(index)} style={{ cursor: "pointer" }} />
-//                                     </div>
-//                                 </div>
-//                                 <hr />
-
-//                             </div>
-
-//                         ))
-//                     )}
-//                     {/* <Button variant="danger" onClick={() => setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' })}>Clear New Member</Button> */}
-//                 </form>
-//             </Modal.Body>
-//             <Modal.Footer>
-//                 <Button type="submit" onClick={handleSubmit}>
-//                     {mission ? 'Update' : 'Add'} Mission
-//                 </Button>
-//                 <Button variant="secondary" onClick={handleCloseModal}>
-//                     Close
-//                 </Button>
-//             </Modal.Footer>
-//         </Modal>
-//     );
-// };
-
-// export default MissionForm;
-
-// import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addMission, updateMission } from '../state/missionsSlice';
-// import { validateMission } from '../utils/validations';
-// import { Modal, Button } from 'react-bootstrap';
-// import { AiOutlineDelete } from 'react-icons/ai';
-
-// const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
-//     const dispatch = useDispatch();
-
-//     const initialMembers = mission && Array.isArray(mission.members) ? mission.members : [];
-
-//     const [name, setName] = useState(mission ? mission.name : '');
-//     const [members, setMembers] = useState(initialMembers);
-//     const [destination, setDestination] = useState(mission ? mission.destination : '');
-//     const [departure, setDeparture] = useState(mission ? mission.departure : '');
-//     const [errors, setErrors] = useState({});
-
-//     const [newMember, setNewMember] = useState({
-//         type: 'Pilot',
-//         experience: '',
-//         job: '',
-//         age: '',
-//         wealth: '',
-//     });
-
-//     useEffect(() => {
-//         if (mission) {
-//             setName(mission.name);
-//             setMembers(initialMembers);
-//             setDestination(mission.destination);
-//             setDeparture(mission.departure);
-//         }
-//     }, [mission]);
-
-//     const handleMemberChange = (e, index = null) => {
-//         const { name, value } = e.target;
-//         if (index === null) {
-//             setNewMember((prevState) => ({
-//                 ...prevState,
-//                 [name]: value,
-//                 ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//                 ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//                 ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//             }));
-//         } else {
-//             setMembers(members.map((member, i) => {
-//                 if (i === index) {
-//                     return {
-//                         ...member,
-//                         [name]: value,
-//                         ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//                         ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//                         ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//                     };
-//                 }
-//                 return member;
-//             }));
-//         }
-//     };
-
-//     const handleAddMember = () => {
-//         setMembers([...members, newMember]);
-//         setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' });
-//     };
-
-//     const handleRemoveMember = (index) => {
-//         setMembers(members.filter((_, i) => i !== index));
-//     };
-
-//     const handleSubmit = (e) => {
-//         console.log('newMember-----', newMember)
-//         console.log('member---', members)
-//         e.preventDefault();
-//         const validationErrors = validateMission(name, departure, members);
-//         if (Object.keys(validationErrors).length === 0) {
-//             const missionData = { name, members, destination, departure };
-//             if (mission) {
-//                 dispatch(updateMission({ ...mission, ...missionData }));
-//             } else {
-//                 dispatch(addMission({ id: Date.now(), ...missionData }));
-//             }
-//             handleCloseModal();
-//         } else {
-//             setErrors(validationErrors);
-//         }
-//     };
-
-//     return (
-//         <Modal show={isFormVisible} onHide={handleCloseModal} size="lg">
-//             <Modal.Header closeButton>
-//                 <Modal.Title>{mission ? 'Edit Mission' : 'New Mission'}</Modal.Title>
-//             </Modal.Header>
-//             <Modal.Body>
-//                 <form onSubmit={handleSubmit}>
-//                     <div style={{ display: "flex", justifyContent: "space-between" }}>
-//                         <div>
-//                             <label>Mission Name:</label>
-//                             <input
-//                                 type="text"
-//                                 value={name}
-//                                 onChange={(e) => setName(e.target.value)}
-//                                 required
-//                             />
-//                             {errors.name && <span className="error">{errors.name}</span>}
-//                         </div>
-//                         <div>
-//                             <label>Destination:</label>
-//                             <select value={destination} onChange={(e) => setDestination(e.target.value)}>
-//                                 <option value="Mars_Alpha_110">Mars Alpha-110</option>
-//                                 <option value="Mars_Alpha_220">Mars Alpha-220</option>
-//                                 <option value="Mars_Alpha_224">Mars Alpha-224</option>
-//                                 <option value="Mars_Alpha_116">Mars Alpha-116</option>
-//                             </select>
-//                         </div>
-//                         <div>
-//                             <label>Departure Date:</label>
-//                             <input
-//                                 type="date"
-//                                 value={departure}
-//                                 onChange={(e) => setDeparture(e.target.value)}
-//                                 required
-//                             />
-//                             {errors.departure && <span className="error">{errors.departure}</span>}
-//                         </div>
-//                     </div>
-//                     <hr />
-//                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//                         <h4>Members</h4>
-//                         <Button onClick={handleAddMember}>Add Member</Button>
-//                     </div>
-                
-//                     {members.length > 0 && (
-//                         members.map((member, index) => (
-//                             <div key={index} style={{ marginBottom: '1em', display: "flex", alignItems: "center" }}>
-//                                 <div>
-//                                     <label>Type:</label>
-//                                     <select name="type" value={member.type} onChange={(e) => handleMemberChange(e, index)}>
-//                                         <option value="Pilot">Pilot</option>
-//                                         <option value="Engineer">Engineer</option>
-//                                         <option value="Passenger">Passenger</option>
-//                                     </select>
-//                                 </div>
-//                                 {member.type === 'Pilot' && (
-//                                     <div>
-//                                         <label>Experience:</label>
-//                                         <input
-//                                             type="number"
-//                                             name="experience"
-//                                             value={member.experience}
-//                                             onChange={(e) => handleMemberChange(e, index)}
-//                                         />
-//                                     </div>
-//                                 )}
-//                                 {member.type === 'Engineer' && (
-//                                     <>
-//                                         <div>
-//                                             <label>Experience:</label>
-//                                             <input
-//                                                 type="number"
-//                                                 name="experience"
-//                                                 value={member.experience}
-//                                                 onChange={(e) => handleMemberChange(e, index)}
-//                                             />
-//                                         </div>
-//                                         <div>
-//                                             <label>Job:</label>
-//                                             <input
-//                                                 type="text"
-//                                                 name="job"
-//                                                 value={member.job}
-//                                                 onChange={(e) => handleMemberChange(e, index)}
-//                                             />
-//                                         </div>
-//                                     </>
-//                                 )}
-//                                 {member.type === 'Passenger' && (
-//                                     <>
-//                                         <div>
-//                                             <label>Age:</label>
-//                                             <input
-//                                                 type="number"
-//                                                 name="age"
-//                                                 value={member.age}
-//                                                 onChange={(e) => handleMemberChange(e, index)}
-//                                             />
-//                                         </div>
-//                                         <div>
-//                                             <label>Wealth:</label>
-//                                             <input
-//                                                 type="number"
-//                                                 name="wealth"
-//                                                 value={member.wealth}
-//                                                 onChange={(e) => handleMemberChange(e, index)}
-//                                             />
-//                                         </div>
-//                                     </>
-//                                 )}
-//                                 <AiOutlineDelete
-//                                     className="ucdelete"
-//                                     onClick={() => handleRemoveMember(index)}
-//                                     style={{ cursor: "pointer", marginLeft: "1em" }}
-//                                 />
-//                             </div>
-//                         ))
-//                     )}
-                    
-//                 </form>
-//             </Modal.Body>
-//             <Modal.Footer>
-//                 <Button type="submit" onClick={handleSubmit}>
-//                     {mission ? 'Update' : 'Add'} Mission
-//                 </Button>
-//                 <Button variant="secondary" onClick={handleCloseModal}>
-//                     Close
-//                 </Button>
-//             </Modal.Footer>
-//         </Modal>
-//     );
-// };
-
-// export default MissionForm;
-
-  // MissionForm.js
-//   import React, { useState, useEffect } from 'react';
-//   import { useDispatch } from 'react-redux';
-//   import { addMission, updateMission } from '../state/missionsSlice';
-//   import { validateMission } from '../utils/validations';
-//   import { Modal, Button } from 'react-bootstrap';
-//   import { AiOutlineDelete } from 'react-icons/ai';
-  
-//   const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
-//     const dispatch = useDispatch();
-  
-//     const initialMembers = mission && Array.isArray(mission.members) ? mission.members : [];
-  
-//     const [name, setName] = useState(mission ? mission.name : '');
-//     const [members, setMembers] = useState(initialMembers);
-//     const [destination, setDestination] = useState(mission ? mission.destination : '');
-//     const [departure, setDeparture] = useState(mission ? mission.departure : '');
-//     const [errors, setErrors] = useState({});
-  
-//     const [newMember, setNewMember] = useState({
-//       type: 'Pilot',
-//       experience: '',
-//       job: '',
-//       age: '',
-//       wealth: '',
-//     });
-  
-//     useEffect(() => {
-//       if (mission) {
-//         setName(mission.name);
-//         setMembers(initialMembers);
-//         setDestination(mission.destination);
-//         setDeparture(mission.departure);
-//       }
-//     }, [mission]);
-  
-//     const handleMemberChange = (e, index = null) => {
-//       const { name, value } = e.target;
-//       if (index === null) {
-//         setNewMember((prevState) => ({
-//           ...prevState,
-//           [name]: value,
-//           ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//           ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//           ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//         }));
-//       } else {
-//         setMembers(members.map((member, i) => {
-//           if (i === index) {
-//             return {
-//               ...member,
-//               [name]: value,
-//               ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//               ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//               ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//             };
-//           }
-//           return member;
-//         }));
-//       }
-//     };
-  
-//     const handleAddMember = () => {
-//       setMembers([...members, newMember]);
-//       setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' });
-//     };
-  
-//     const handleRemoveMember = (index) => {
-//       setMembers(members.filter((_, i) => i !== index));
-//     };
-  
-//     const handleSubmit = (e) => {
-//       e.preventDefault();
-//       const validationErrors = validateMission(name, departure, members);
-//       if (Object.keys(validationErrors).length === 0) {
-//         const missionData = { name, members, destination, departure };
-//         if (mission) {
-//           dispatch(updateMission({ ...mission, ...missionData }));
-//         } else {
-//           dispatch(addMission({ id: Date.now(), ...missionData }));
-//         }
-//         handleCloseModal();
-//       } else {
-//         setErrors(validationErrors);
-//       }
-//     };
-  
-//     return (
-//       <Modal show={isFormVisible} onHide={handleCloseModal} size="lg">
-//         <Modal.Header closeButton>
-//           <Modal.Title>{mission ? 'Edit Mission' : 'New Mission'}</Modal.Title>
-//         </Modal.Header>
-//         <Modal.Body>
-//           <form onSubmit={handleSubmit}>
-//             <div style={{ display: "flex", justifyContent: "space-between" }}>
-//               <div>
-//                 <label>Mission Name:</label>
-//                 <input
-//                   type="text"
-//                   value={name}
-//                   onChange={(e) => setName(e.target.value)}
-//                   required
-//                 />
-//                 {errors.name && <span className="error">{errors.name}</span>}
-//               </div>
-//               <div>
-//                 <label>Destination:</label>
-//                 <select value={destination} onChange={(e) => setDestination(e.target.value)}>
-//                   <option value="Mars_Alpha_110">Mars Alpha-110</option>
-//                   <option value="Mars_Alpha_220">Mars Alpha-220</option>
-//                   <option value="Mars_Alpha_224">Mars Alpha-224</option>
-//                   <option value="Mars_Alpha_116">Mars Alpha-116</option>
-//                 </select>
-//               </div>
-//               <div>
-//                 <label>Departure Date:</label>
-//                 <input
-//                   type="date"
-//                   value={departure}
-//                   onChange={(e) => setDeparture(e.target.value)}
-//                   required
-//                 />
-//                 {errors.departure && <span className="error">{errors.departure}</span>}
-//               </div>
-//             </div>
-//             <hr />
-//             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//               <h4>Members</h4>
-//               <Button onClick={handleAddMember}>Add Member</Button>
-//             </div>
-//             {errors.members && errors.members.map((memberError, index) => (
-//               <div key={index} className="error">
-//                 {`Member ${index + 1}: ${Object.values(memberError).join(', ')}`}
-//               </div>
-//             ))}
-//             {members.length > 0 && (
-//               members.map((member, index) => (
-//                 <div key={index} style={{ marginBottom: '1em', display: "flex", alignItems: "center" }}>
-//                   <div>
-//                     <label>Type:</label>
-//                     <select name="type" value={member.type} onChange={(e) => handleMemberChange(e, index)}>
-//                       <option value="Pilot">Pilot</option>
-//                       <option value="Engineer">Engineer</option>
-//                       <option value="Passenger">Passenger</option>
-//                     </select>
-//                   </div>
-//                   {member.type === 'Pilot' && (
-//                     <div>
-//                       <label>Experience:</label>
-//                       <input
-//                         type="number"
-//                         name="experience"
-//                         value={member.experience}
-//                         onChange={(e) => handleMemberChange(e, index)}
-//                       />
-//                     </div>
-//                   )}
-//                   {member.type === 'Engineer' && (
-//                     <>
-//                       <div>
-//                         <label>Experience:</label>
-//                         <input
-//                           type="number"
-//                           name="experience"
-//                           value={member.experience}
-//                           onChange={(e) => handleMemberChange(e, index)}
-//                         />
-//                       </div>
-//                       <div>
-//                         <label>Job:</label>
-//                         <input
-//                           type="text"
-//                           name="job"
-//                           value={member.job}
-//                           onChange={(e) => handleMemberChange(e, index)}
-//                         />
-//                       </div>
-//                     </>
-//                   )}
-//                   {member.type === 'Passenger' && (
-//                     <>
-//                       <div>
-//                         <label>Age:</label>
-//                         <input
-//                           type="number"
-//                           name="age"
-//                           value={member.age}
-//                           onChange={(e) => handleMemberChange(e, index)}
-//                         />
-//                       </div>
-//                       <div>
-//                         <label>Wealth:</label>
-//                         <input
-//                           type="number"
-//                           name="wealth"
-//                           value={member.wealth}
-//                           onChange={(e) => handleMemberChange(e, index)}
-//                         />
-//                       </div>
-//                     </>
-//                   )}
-//                   <AiOutlineDelete
-//                     className="ucdelete"
-//                     onClick={() => handleRemoveMember(index)}
-//                     style={{ cursor: "pointer", marginLeft: "1em" }}
-//                   />
-//                 </div>
-//               ))
-//             )}
-//           </form>
-//         </Modal.Body>
-//         <Modal.Footer>
-//           <Button type="submit" onClick={handleSubmit}>
-//             {mission ? 'Update' : 'Add'} Mission
-//           </Button>
-//           <Button variant="secondary" onClick={handleCloseModal}>
-//             Close
-//           </Button>
-//         </Modal.Footer>
-//       </Modal>
-//     );
-//   };
-  
-//   export default MissionForm;
-  
-
-// import React, { useState, useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { addMission, updateMission } from '../state/missionsSlice';
-// import { validateMission } from '../utils/validations';
-// import { Modal, Button } from 'react-bootstrap';
-// import { AiOutlineDelete } from 'react-icons/ai';
-
-// const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
-//   const dispatch = useDispatch();
-
-//   const initialMembers = mission && Array.isArray(mission.members) ? mission.members : [];
-
-//   const [name, setName] = useState(mission ? mission.name : '');
-//   const [members, setMembers] = useState(initialMembers);
-//   const [destination, setDestination] = useState(mission ? mission.destination : '');
-//   const [departure, setDeparture] = useState(mission ? mission.departureDate : '');
-//   const [errors, setErrors] = useState({});
-
-//   const [newMember, setNewMember] = useState({
-//     type: 'Pilot',
-//     experience: '',
-//     job: '',
-//     age: '',
-//     wealth: '',
-//   });
-
-//   useEffect(() => {
-//     if (mission) {
-//       setName(mission.name);
-//       setMembers(initialMembers);
-//       setDestination(mission.destination);
-//       setDeparture(mission.departureDate);
-//     }
-//   }, [mission]);
-
-//   const handleMemberChange = (e, index = null) => {
-//     const { name, value } = e.target;
-//     if (index === null) {
-//       setNewMember((prevState) => ({
-//         ...prevState,
-//         [name]: value,
-//         ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//         ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//         ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//       }));
-//     } else {
-//       setMembers(members.map((member, i) => {
-//         if (i === index) {
-//           return {
-//             ...member,
-//             [name]: value,
-//             ...(name === 'type' && value !== 'Pilot' && { experience: '' }),
-//             ...(name === 'type' && value !== 'Engineer' && { job: '' }),
-//             ...(name === 'type' && value !== 'Passenger' && { age: '', wealth: '' })
-//           };
-//         }
-//         return member;
-//       }));
-//     }
-//   };
-
-//   const handleAddMember = () => {
-//     setMembers([...members, newMember]);
-//     setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' });
-//   };
-
-//   const handleRemoveMember = (index) => {
-//     setMembers(members.filter((_, i) => i !== index));
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     const validationErrors = validateMission(name, departure, members);
-//     if (Object.keys(validationErrors).length === 0) {
-//       const missionData = { name, members, destination, departureDate: departure };
-//       if (mission) {
-//         dispatch(updateMission({ ...mission, ...missionData }));
-//       } else {
-//         dispatch(addMission({ id: Date.now(), ...missionData }));
-//       }
-//       handleCloseModal();
-//     } else {
-//       setErrors(validationErrors);
-//     }
-//   };
-
-//   return (
-//     <Modal show={isFormVisible} onHide={handleCloseModal} size="lg">
-//       <Modal.Header closeButton>
-//         <Modal.Title>{mission ? 'Edit Mission' : 'New Mission'}</Modal.Title>
-//       </Modal.Header>
-//       <Modal.Body>
-//         <form onSubmit={handleSubmit}>
-//           <div style={{ display: "flex", justifyContent: "space-between" }}>
-//             <div>
-//               <label>Mission Name:</label>
-//               <input
-//                 type="text"
-//                 value={name}
-//                 onChange={(e) => setName(e.target.value)}
-//                 required
-//               />
-//               {errors.name && <span className="error">{errors.name}</span>}
-//             </div>
-//             <div>
-//               <label>Destination:</label>
-//               <select value={destination} onChange={(e) => setDestination(e.target.value)}>
-//                 <option value="Mars_Alpha_110">Mars Alpha-110</option>
-//                 <option value="Mars_Alpha_220">Mars Alpha-220</option>
-//                 <option value="Mars_Alpha_224">Mars Alpha-224</option>
-//                 <option value="Mars_Alpha_116">Mars Alpha-116</option>
-//               </select>
-//             </div>
-//             <div>
-//               <label>Departure Date:</label>
-//               <input
-//                 type="date"
-//                 value={departure}
-//                 onChange={(e) => setDeparture(e.target.value)}
-//                 required
-//               />
-//               {errors.departure && <span className="error">{errors.departure}</span>}
-//             </div>
-//           </div>
-//           <hr />
-//           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-//             <h4>Members</h4>
-//             <Button onClick={handleAddMember}>Add Member</Button>
-//           </div>
-//           {errors.members && errors.members.map((memberError, index) => (
-//             <div key={index} className="error">
-//               {`Member ${index + 1}: ${Object.values(memberError).join(', ')}`}
-//             </div>
-//           ))}
-//           {members.length > 0 && (
-//             members.map((member, index) => (
-//               <div key={index} style={{ marginBottom: '1em', display: "flex", alignItems: "center" }}>
-//                 <div>
-//                   <label>Type:</label>
-//                   <select name="type" value={member.type} onChange={(e) => handleMemberChange(e, index)}>
-//                     <option value="Pilot">Pilot</option>
-//                     <option value="Engineer">Engineer</option>
-//                     <option value="Passenger">Passenger</option>
-//                   </select>
-//                 </div>
-//                 {member.type === 'Pilot' && (
-//                   <div>
-//                     <label>Experience:</label>
-//                     <input
-//                       type="number"
-//                       name="experience"
-//                       value={member.experience}
-//                       onChange={(e) => handleMemberChange(e, index)}
-//                     />
-//                   </div>
-//                 )}
-//                 {member.type === 'Engineer' && (
-//                   <>
-//                     <div>
-//                       <label>Experience:</label>
-//                       <input
-//                         type="number"
-//                         name="experience"
-//                         value={member.experience}
-//                         onChange={(e) => handleMemberChange(e, index)}
-//                       />
-//                     </div>
-//                     <div>
-//                       <label>Job:</label>
-//                       <input
-//                         type="text"
-//                         name="job"
-//                         value={member.job}
-//                         onChange={(e) => handleMemberChange(e, index)}
-//                       />
-//                     </div>
-//                   </>
-//                 )}
-//                 {member.type === 'Passenger' && (
-//                   <>
-//                     <div>
-//                       <label>Age:</label>
-//                       <input
-//                         type="number"
-//                         name="age"
-//                         value={member.age}
-//                         onChange={(e) => handleMemberChange(e, index)}
-//                       />
-//                     </div>
-//                     <div>
-//                       <label>Wealth:</label>
-//                       <input
-//                         type="number"
-//                         name="wealth"
-//                         value={member.wealth}
-//                         onChange={(e) => handleMemberChange(e, index)}
-//                       />
-//                     </div>
-//                   </>
-//                 )}
-//                 <AiOutlineDelete
-//                   className="ucdelete"
-//                   onClick={() => handleRemoveMember(index)}
-//                   style={{ cursor: "pointer", marginLeft: "1em" }}
-//                 />
-//               </div>
-//             ))
-//           )}
-//         </form>
-//       </Modal.Body>
-//       <Modal.Footer>
-//         <Button type="submit" onClick={handleSubmit}>
-//           {mission ? 'Update' : 'Add'} Mission
-//         </Button>
-//         <Button variant="secondary" onClick={handleCloseModal}>
-//           Close
-//         </Button>
-//       </Modal.Footer>
-//     </Modal>
-//   );
-// };
-
-// export default MissionForm;
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addMission, updateMission } from '../state/missionsSlice';
-import { validateMission } from '../utils/validations';
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap';
 import { AiOutlineDelete } from 'react-icons/ai';
+
+//components
+import { addMission, updateMission } from '../state/missionsSlice';
+import { formatDate, formatDateEdit } from '../utils/dateUtils';
+import { validateMission } from '../utils/validations';
+
 
 const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
   const dispatch = useDispatch();
@@ -891,8 +16,8 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
 
   const [name, setName] = useState(mission ? mission.name : '');
   const [members, setMembers] = useState(initialMembers);
-  const [destination, setDestination] = useState(mission ? mission.destination : '');
-  const [departure, setDeparture] = useState(mission ? mission.departureDate : '');
+  const [destination, setDestination] = useState(mission ? mission.destination : 'Mars Alpha-110');
+  const [departure, setDeparture] = useState(mission ? formatDate(mission.departureDate) : '');
   const [errors, setErrors] = useState({});
 
   const [newMember, setNewMember] = useState({
@@ -903,15 +28,20 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
     wealth: '',
   });
 
+  const jobList = ['Navigation', 'Solar panels', 'Maintenance', 'Mechanics']
+  const destinationList = ['Mars Alpha-110', 'Mars Alpha-220', 'Mars Alpha-224', 'Mars Alpha-116']
+  const memberTypes = ['Pilot', 'Engineer', 'Passenger']
+
   useEffect(() => {
     if (mission) {
       setName(mission.name);
       setMembers(initialMembers);
       setDestination(mission.destination);
-      setDeparture(mission.departureDate);
+      setDeparture(formatDate(mission.departureDate));
     }
   }, [mission]);
 
+  //Event handler for all the fields
   const handleMemberChange = (e, index = null) => {
     const { name, value } = e.target;
     if (index === null) {
@@ -938,20 +68,23 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
     }
   };
 
+  //Event handler for Add Member button
   const handleAddMember = () => {
     setMembers([...members, newMember]);
     setNewMember({ type: 'Pilot', experience: '', job: '', age: '', wealth: '' });
   };
 
+  //Event handler for Remove Member button
   const handleRemoveMember = (index) => {
     setMembers(members.filter((_, i) => i !== index));
   };
 
+  //Form submit function
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validateMission(name, departure, members);
     if (Object.keys(validationErrors).length === 0) {
-      const missionData = { name, members, destination, departureDate: departure };
+      const missionData = { name, members, destination, departureDate: formatDateEdit(departure) };
       if (mission) {
         dispatch(updateMission({ ...mission, ...missionData }));
       } else {
@@ -961,6 +94,19 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
     } else {
       setErrors(validationErrors);
     }
+  };
+
+  //Error message handling function
+  const renderMemberErrors = (index, field) => {
+    if (errors.members) {
+      const memberError = errors.members.find(err => err.index === index);
+      if (memberError) {
+        return Object.keys(memberError).map((key) => (
+          key !== 'index' && <Form.Text key={key} className="text-danger">{memberError[key]}</Form.Text>
+        ));
+      }
+    }
+    return null;
   };
 
   return (
@@ -973,9 +119,8 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
           <Row className="mb-3">
             <Col>
               <Form.Group>
-                <Form.Label htmlFor='missionname'>Mission Name</Form.Label>
+                <Form.Label>Mission Name</Form.Label>
                 <Form.Control
-                  id='missionname'
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -988,10 +133,7 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
               <Form.Group>
                 <Form.Label>Destination</Form.Label>
                 <Form.Control as="select" value={destination} onChange={(e) => setDestination(e.target.value)}>
-                  <option value="Mars_Alpha_110">Mars Alpha-110</option>
-                  <option value="Mars_Alpha_220">Mars Alpha-220</option>
-                  <option value="Mars_Alpha_224">Mars Alpha-224</option>
-                  <option value="Mars_Alpha_116">Mars Alpha-116</option>
+                  {destinationList.map(item => <option key={item}>{item}</option>)}
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -1014,14 +156,13 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
               <h4>Members</h4>
             </Col>
             <Col className="text-end">
-              <Button onClick={handleAddMember}>Add Member</Button>
+              <Button onClick={handleAddMember} variant="outline-primary">Add Member </Button>
             </Col>
           </Row>
-          {errors.members && errors.members.map((memberError, index) => (
-            <div key={index} className="text-danger">
-              {`Member ${index + 1}: ${Object.values(memberError).join(', ')}`}
-            </div>
-          ))}
+          {errors.pilot && <Form.Text className="text-danger">{errors.pilot}</Form.Text>} <br />
+          {errors.passenger && <Form.Text className="text-danger">{errors.passenger}</Form.Text>}
+          {errors.job && <Form.Text className="text-danger">{errors.job}</Form.Text>}
+
           {members.length > 0 && (
             members.map((member, index) => (
               <Row key={index} className="mb-3 align-items-center">
@@ -1029,9 +170,7 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                   <Form.Group>
                     <Form.Label>Type</Form.Label>
                     <Form.Control as="select" name="type" value={member.type} onChange={(e) => handleMemberChange(e, index)}>
-                      <option value="Pilot">Pilot</option>
-                      <option value="Engineer">Engineer</option>
-                      <option value="Passenger">Passenger</option>
+                      {memberTypes.map(item => <option key={item}>{item}</option>)}
                     </Form.Control>
                   </Form.Group>
                 </Col>
@@ -1042,9 +181,11 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                       <Form.Control
                         type="number"
                         name="experience"
+                        min="0"
                         value={member.experience}
                         onChange={(e) => handleMemberChange(e, index)}
                       />
+                      {renderMemberErrors(index)}
                     </Form.Group>
                   </Col>
                 )}
@@ -1056,6 +197,7 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                         <Form.Control
                           type="number"
                           name="experience"
+                          min="0"
                           value={member.experience}
                           onChange={(e) => handleMemberChange(e, index)}
                         />
@@ -1064,12 +206,11 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                     <Col>
                       <Form.Group>
                         <Form.Label>Job</Form.Label>
-                        <Form.Control
-                          type="text"
-                          name="job"
-                          value={member.job}
-                          onChange={(e) => handleMemberChange(e, index)}
-                        />
+                        <Form.Control as="select" name="job" value={member.job} onChange={(e) => handleMemberChange(e, index)}>
+                          <option>Select job</option>
+                          {jobList.map(item => <option key={item}>{item}</option>)}
+                        </Form.Control>
+                        {renderMemberErrors(index)}
                       </Form.Group>
                     </Col>
                   </>
@@ -1082,9 +223,11 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                         <Form.Control
                           type="number"
                           name="age"
+                          min="0"
                           value={member.age}
                           onChange={(e) => handleMemberChange(e, index)}
                         />
+                        {renderMemberErrors(index)}
                       </Form.Group>
                     </Col>
                     <Col>
@@ -1094,6 +237,7 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                           type="number"
                           name="wealth"
                           value={member.wealth}
+                          min="0"
                           onChange={(e) => handleMemberChange(e, index)}
                         />
                       </Form.Group>
@@ -1102,9 +246,8 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
                 )}
                 <Col xs="auto">
                   <AiOutlineDelete
-                    className="text-danger"
+                    className="ucdelete"
                     onClick={() => handleRemoveMember(index)}
-                    style={{ cursor: "pointer" }}
                   />
                 </Col>
               </Row>
@@ -1113,10 +256,10 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit" onClick={handleSubmit}>
-          {mission ? 'Update' : 'Add'} Mission
+        <Button variant="outline-primary" type="submit" onClick={handleSubmit}>
+          {mission ? 'Update Mission' : 'Submit'}
         </Button>
-        <Button variant="secondary" onClick={handleCloseModal}>
+        <Button variant="outline-secondary" onClick={handleCloseModal}>
           Close
         </Button>
       </Modal.Footer>
@@ -1125,4 +268,3 @@ const MissionForm = ({ mission, isFormVisible, handleCloseModal }) => {
 };
 
 export default MissionForm;
-

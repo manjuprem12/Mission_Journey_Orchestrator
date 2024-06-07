@@ -1,0 +1,117 @@
+.mission-list {
+  &__container {
+    // text-align: center;
+    margin: 1rem;
+  }
+
+  &__search-container {
+    position: relative;
+    margin-top: 10px;
+    width: 70%;
+
+    &__input {
+      width: 100%;
+      padding: 10px 30px 10px 10px;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      font-size: 16px;
+    }
+
+    &__icon {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #888;
+    }
+  }
+
+  &__mission-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__ucedit {
+    font-size: smaller;
+    color: #dc3545;
+    margin: 1em;
+    cursor: pointer;
+  }
+  // &__ucdelete {
+  //   font-size: smaller;
+  //   color: #dc3545;
+  //   cursor: pointer;
+  // }
+  &__uchome {
+    font-size: xxx-large;
+    cursor: pointer;
+    // color: #dc3545;
+    // margin: 1em;
+  }
+
+  &__table-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 3px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      border-right: none;
+      font-size: smaller;
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    thead th {
+      border-bottom: 1px solid #ddd;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    list-style: none;
+    //   padding: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    justify-content: flex-end;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    margin: 0;
+
+    &__item {
+      margin: 0 5px;
+      cursor: pointer;
+
+      &.active {
+        font-weight: bold;
+        color: #007bff;
+      }
+    }
+  }
+  &__text {
+    font-size: xx-small;
+  }
+  &__danger-text {
+    font-size: xx-small;
+    color: red;
+  }
+}
