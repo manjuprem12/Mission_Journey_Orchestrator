@@ -10,6 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
   - [npm run build](#npm-run-build)
   - [npm run eject](#npm-run-eject)
 - [Installing a Dependency](#installing-a-dependency)
+- [Documents Refered](#documents-refered)
 
 ## Folder Structure
 After creation, project look like this:
@@ -85,7 +86,13 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Installing a Dependency
+The generated project includes React and ReactDOM as dependencies. It also includes a set of scripts used by Create React App as a development dependency. You may install other dependencies (for example, React Router) with `npm`:
+
+```
+npm install --save <library-name>
+```
+## Documents Refered
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
