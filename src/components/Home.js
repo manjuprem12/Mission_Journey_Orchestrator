@@ -45,7 +45,7 @@ const Home = () => {
             <img src={FeatureMartianDream} className="card-img-top" alt="Martian Dream" />
             <div className="card-body">
               <h5 className="card-title">Martian Dream</h5>
-              <p className="card-text">With Earth running out of coffee, Mars is our next home. Relay42's "Journey Orchestrator" helps us settle there, making the dream of living under Martian sunsets a reality.</p>
+              <p className="card-text">With Earth running out of coffee, Mars is our next home. "Journey Orchestrator" helps us settle there, making the dream of living under Martian sunsets a reality.</p>
             </div>
           </div>
 
@@ -53,7 +53,7 @@ const Home = () => {
             <img src={FeatureJourney} className="card-img-top" alt="Journey Orchestrator" />
             <div className="card-body">
               <h5 className="card-title">Journey Orchestrator</h5>
-              <p className="card-text">Relay42’s "Journey Orchestrator" is the game-changer for Martian colonization. It’s not just about managing logistics but orchestrating humanity’s leap from Earth to Mars, ensuring a seamless and innovative transition.</p>
+              <p className="card-text">"Journey Orchestrator" is the game-changer for Martian colonization. It’s not just about managing logistics but orchestrating humanity’s leap from Earth to Mars, ensuring a seamless and innovative transition.</p>
             </div>
           </div>
 
@@ -61,7 +61,7 @@ const Home = () => {
             <img src={FeatureHome} className="card-img-top" alt="A New Home" />
             <div className="card-body">
               <h5 className="card-title">A New Home</h5>
-              <p className="card-text">The journey to Mars is no longer a dream. With Relay42’s "Journey Orchestrator," the chaos of interplanetary settlement becomes a structured reality, paving the way for humans to thrive under Martian skies.</p>
+              <p className="card-text">The journey to Mars is no longer a dream. With "Journey Orchestrator," the chaos of interplanetary settlement becomes a structured reality, paving the way for humans to thrive under Martian skies.</p>
             </div>
           </div>
 
@@ -69,7 +69,7 @@ const Home = () => {
             <img src={FeatureStart} className="card-img-top" alt="Ready? Let's Start!" />
             <div className="card-body">
               <h5 className="card-title">Ready? Let's Start!</h5>
-              <p className="card-text">Ready for Mars? Relay42's Journey Orchestrator makes it easy. Our platform manages everything for your mission with real-time updates and a user-friendly interface. Let's make Mars our new home together.</p>
+              <p className="card-text">Ready for Mars? Journey Orchestrator makes it easy. Our platform manages everything for your mission with real-time updates and a user-friendly interface. Let's make Mars our new home together.</p>
               <Button variant="outline-primary" onClick={handleSubmit}>Next <FiArrowRight />{" "}</Button>
             </div>
           </div>
@@ -92,9 +92,8 @@ const Home = () => {
             <div className="card-body">
               <h5 className="card-title">AMSTERDAM</h5>
               <p className="card-text">Meeuwenlaan 100</p>
-              <p className="card-text">1021 JL Amsterdam</p>
               <p className="card-text">The Netherlands</p>
-              <p className="card-text"><FcPhone />&nbsp;&nbsp;+31(0)20 303</p>
+              <p className="card-text"><FcPhone />&nbsp;&nbsp;+31(0)10 111</p>
             </div>
           </div>
         </div>
