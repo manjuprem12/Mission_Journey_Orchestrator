@@ -79,7 +79,7 @@ const Home = () => {
       <section id="about" className='section-container'>
         <h2>About Us</h2>
         <div>
-          <p>Brief overview of Relay42 and its mission.</p>
+          <p>Brief overview of mission.</p>
           <p>Introduction to the team behind the Journey Orchestrator platform.</p>
           <p>Company values and commitment to innovation.</p>
         </div>
